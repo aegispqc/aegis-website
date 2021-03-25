@@ -1,0 +1,1589 @@
+<html>
+
+<head>
+	<title>AEGIS</title>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="google" content="notranslate" />
+	<link rel="shortcut icon" type="image/png" href="./favicon.png" />
+	<link rel="bookmark" type="image/png" href="./favicon.png" />
+	<link rel="icon" type="image/png" href="./favicon.png">
+	<link rel="alternate icon" type="image/png" href="./favicon.png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+	<style>
+		html {
+			font-size: 24px;
+		}
+
+		.scroll-smooth {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			width: 100%;
+			height: auto;
+			padding: 0;
+			margin: 0;
+			font-family: Montserrat;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+		* {
+			box-sizing: border-box;
+			position: relative;
+			overflow-anchor: none;
+		}
+
+		.none {
+			display: none !important;
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+			page-break-after: avoid;
+			page-break-inside: avoid;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			page-break-after: avoid;
+			page-break-inside: avoid
+		}
+
+		h1+p,
+		h2+p,
+		h3+p {
+			page-break-before: avoid;
+		}
+
+		table,
+		blockquote,
+		strong {
+			page-break-inside: avoid;
+		}
+
+		ul,
+		ol,
+		dl {
+			page-break-before: avoid;
+		}
+
+		.twitter-logo {
+			background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 510"%3E%3Cg%3E%3Cg id="post-twitter"%3E%3Cpath d="M459,0H51C22.95,0,0,22.95,0,51v408c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51V51C510,22.95,487.05,0,459,0z M400.35,186.15c-2.55,117.3-76.5,198.9-188.7,204C165.75,392.7,132.6,377.4,102,359.55c33.15,5.101,76.5-7.649,99.45-28.05c-33.15-2.55-53.55-20.4-63.75-48.45c10.2,2.55,20.4,0,28.05,0c-30.6-10.2-51-28.05-53.55-68.85c7.65,5.1,17.85,7.65,28.05,7.65c-22.95-12.75-38.25-61.2-20.4-91.8c33.15,35.7,73.95,66.3,140.25,71.4c-17.85-71.4,79.051-109.65,117.301-61.2c17.85-2.55,30.6-10.2,43.35-15.3c-5.1,17.85-15.3,28.05-28.05,38.25c12.75-2.55,25.5-5.1,35.7-10.2C425.85,165.75,413.1,175.95,400.35,186.15z" fill="rgb(255,255,255)"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+		}
+
+		.email-logo {
+			background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.626 511.626"%3E%3Cg%3E%3Cg%3E%3Cpath fill="rgb(255,255,255)" d="M49.106,178.729c6.472,4.567,25.981,18.131,58.528,40.685c32.548,22.554,57.482,39.92,74.803,52.099c1.903,1.335,5.946,4.237,12.131,8.71c6.186,4.476,11.326,8.093,15.416,10.852c4.093,2.758,9.041,5.852,14.849,9.277c5.806,3.422,11.279,5.996,16.418,7.7c5.14,1.718,9.898,2.569,14.275,2.569h0.287h0.288c4.377,0,9.137-0.852,14.277-2.569c5.137-1.704,10.615-4.281,16.416-7.7c5.804-3.429,10.752-6.52,14.845-9.277c4.093-2.759,9.229-6.376,15.417-10.852c6.184-4.477,10.232-7.375,12.135-8.71c17.508-12.179,62.051-43.11,133.615-92.79c13.894-9.703,25.502-21.411,34.827-35.116c9.332-13.699,13.993-28.07,13.993-43.105c0-12.564-4.523-23.319-13.565-32.264c-9.041-8.947-19.749-13.418-32.117-13.418H45.679c-14.655,0-25.933,4.948-33.832,14.844C3.949,79.562,0,91.934,0,106.779c0,11.991,5.236,24.985,15.703,38.974C26.169,159.743,37.307,170.736,49.106,178.729z"/%3E%3Cpath fill="rgb(255,255,255)" d="M483.072,209.275c-62.424,42.251-109.824,75.087-142.177,98.501c-10.849,7.991-19.65,14.229-26.409,18.699c-6.759,4.473-15.748,9.041-26.98,13.702c-11.228,4.668-21.692,6.995-31.401,6.995h-0.291h-0.287c-9.707,0-20.177-2.327-31.405-6.995c-11.228-4.661-20.223-9.229-26.98-13.702c-6.755-4.47-15.559-10.708-26.407-18.699c-25.697-18.842-72.995-51.68-141.896-98.501C17.987,202.047,8.375,193.762,0,184.437v226.685c0,12.57,4.471,23.319,13.418,32.265c8.945,8.949,19.701,13.422,32.264,13.422h420.266c12.56,0,23.315-4.473,32.261-13.422c8.949-8.949,13.418-19.694,13.418-32.265V184.437C503.441,193.569,493.927,201.854,483.072,209.275z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+		}
+
+		.github-logo {
+			background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 438.549 438.549"%3E%3Cg%3E%3Cpath fill="rgb(255,255,255)" d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136c-4.187,0.767-9.469,1.092-15.846,1c-6.374-0.089-12.991-0.757-19.842-1.999c-6.854-1.231-13.229-4.086-19.13-8.559c-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559c-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-0.951-2.568-2.098-3.711-3.429c-1.142-1.331-1.997-2.663-2.568-3.997c-0.572-1.335-0.098-2.43,1.427-3.289c1.525-0.859,4.281-1.276,8.28-1.276l5.708,0.853c3.807,0.763,8.516,3.042,14.133,6.851c5.614,3.806,10.229,8.754,13.846,14.842c4.38,7.806,9.657,13.754,15.846,17.847c6.184,4.093,12.419,6.136,18.699,6.136c6.28,0,11.704-0.476,16.274-1.423c4.565-0.952,8.848-2.383,12.847-4.285c1.713-12.758,6.377-22.559,13.988-29.41c-10.848-1.14-20.601-2.857-29.264-5.14c-8.658-2.286-17.605-5.996-26.835-11.14c-9.235-5.137-16.896-11.516-22.985-19.126c-6.09-7.614-11.088-17.61-14.987-29.979c-3.901-12.374-5.852-26.648-5.852-42.826c0-23.035,7.52-42.637,22.557-58.817c-7.044-17.318-6.379-36.732,1.997-58.24c5.52-1.715,13.706-0.428,24.554,3.853c10.85,4.283,18.794,7.952,23.84,10.994c5.046,3.041,9.089,5.618,12.135,7.708c17.705-4.947,35.976-7.421,54.818-7.421s37.117,2.474,54.823,7.421l10.849-6.849c7.419-4.57,16.18-8.758,26.262-12.565c10.088-3.805,17.802-4.853,23.134-3.138c8.562,21.509,9.325,40.922,2.279,58.24c15.036,16.18,22.559,35.787,22.559,58.817c0,16.178-1.958,30.497-5.853,42.966c-3.9,12.471-8.941,22.457-15.125,29.979c-6.191,7.521-13.901,13.85-23.131,18.986c-9.232,5.14-18.182,8.85-26.84,11.136c-8.662,2.286-18.415,4.004-29.263,5.146c9.894,8.562,14.842,22.077,14.842,40.539v60.237c0,3.422,1.19,6.279,3.572,8.562c2.379,2.279,6.136,2.95,11.276,1.995c44.163-14.653,80.185-41.062,108.068-79.226c27.88-38.161,41.825-81.126,41.825-128.906C438.536,184.851,428.728,148.168,409.132,114.573z"/%3E%3C/g%3E%3C/svg%3E');
+		}
+
+		hr {
+			width: 100%;
+			height: 2px;
+			padding: 0;
+			margin: 0;
+			border: unset;
+			background-color: black;
+		}
+
+		hr.white {
+			background-color: white;
+		}
+
+		.container {
+			width: 100%;
+			height: auto;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: stretch;
+			background-color: black;
+		}
+
+		.container>div {
+			padding: 3rem 15px;
+		}
+
+		.container>.menu {
+			padding: 15px;
+		}
+
+		.container>div>* {
+			max-width: 1140px;
+		}
+
+		.menu {
+			width: 100%;
+			height: 106px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: sticky;
+			top: 0;
+			opacity: 1;
+			z-index: 5;
+		}
+
+		.menu-animation {
+			opacity: 0;
+			animation: ani-A 3s 7s forwards ease-in-out;
+		}
+
+		.menu>div {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			align-items: stretch;
+			padding: 8px 0;
+		}
+
+		.menu a {
+			color: white;
+			cursor: pointer;
+			text-decoration: none;
+		}
+
+		.menu>div>a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 1.3em;
+			font-weight: 700;
+			transition: font-size 0.3s;
+		}
+
+		.menu>div>div {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			flex-grow: 1;
+		}
+
+		.menu>div>div>a {
+			padding: 0.75rem;
+			font-size: 0.9rem;
+			font-weight: 700;
+		}
+
+		.page-first {
+			position: fixed;
+			top: 0px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			min-height: calc(100 * var(--vh));
+			page-break-after: always;
+		}
+
+		.page-first>div:nth-child(1) {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.page-first>div:nth-child(1)>svg:nth-child(1) {
+			width: 338px;
+			height: 392px;
+		}
+
+		.page-first>.scroll-prompt {
+			position: absolute;
+			width: 4rem;
+			height: calc(3rem / 1.414);
+			left: calc(50% - 2rem);
+			bottom: 0;
+			opacity: 1;
+			animation: scroll-prompt-animation 1.5s 0s infinite ease-out;
+			cursor: pointer;
+		}
+
+		.page-first>.scroll-prompt-animation {
+			opacity: 0;
+			background-color: #ffe254;
+			animation: ani-A 2s 10s forwards ease-out;
+		}
+
+		@keyframes scroll-prompt-animation {
+			0% {
+				background-color: #ffe254;
+				transform: scaleY(1);
+			}
+
+			50% {
+				background-color: #ecb033;
+				transform: scaleY(1.25);
+			}
+
+			100% {
+				background-color: #ffe254;
+				transform: scaleY(1);
+			}
+		}
+
+		.page-first>.scroll-prompt>div {
+			position: absolute;
+			width: 2.05rem;
+			height: 100%;
+			top: 0;
+			pointer-events: none;
+		}
+
+		.page-first>.scroll-prompt>div:nth-child(1) {
+			left: -1px;
+			background-image: linear-gradient(133deg, rgba(0, 0, 0) 51%, transparent 51%);
+		}
+
+		.page-first>.scroll-prompt>div:nth-child(2) {
+			right: -1px;
+			background-image: linear-gradient(-133deg, rgba(0, 0, 0) 51%, transparent 51%);
+		}
+
+		.page-first>h1 {
+			margin: 0;
+			font-size: 3em;
+			font-weight: 700;
+			background: -webkit-linear-gradient(180deg, #fecd4f, #ce7e00);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			letter-spacing: 3px;
+		}
+
+		.page-first>h2 {
+			margin: 0;
+			font-size: 1.15em;
+			font-weight: 500;
+			background: -webkit-linear-gradient(180deg, #94938f, #ededed);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.page-block {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			background-color: white;
+		}
+
+		.page-block.page-print-break,
+		.page-block .page-print-break {
+			page-break-after: always;
+		}
+
+		.page-block:nth-child(3) {
+			margin-top: calc(105 * var(--vh));
+			;
+		}
+
+		.page-block>* {
+			opacity: 0;
+		}
+
+		.page-block>*.visible {
+			opacity: 1;
+		}
+
+		.href-anchor {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			top: -3rem;
+			left: 50%;
+			opacity: 0;
+		}
+
+		.page-block>*.active {
+			animation: page-block-item__fan_in .8s 0s forwards ease-out;
+		}
+
+		@keyframes ani-A {
+			0% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}
+		}
+
+		@keyframes page-block-item__fan_in {
+			0% {
+				transform: translate(2%, 5px);
+				opacity: 0;
+			}
+
+			100% {
+				transform: translate(0%, 0px);
+				opacity: 1;
+			}
+		}
+
+		.page-block h2 {
+			font-size: 1.15rem;
+			font-weight: 700;
+		}
+
+		.page-block a:link,
+		.page-block a:visited {
+			color: #98d6ff;
+		}
+
+		.page-block p {
+			font-weight: 500;
+			line-height: 2;
+			text-align: justify;
+			text-indent: 25px;
+		}
+
+		.page-block p strong {
+			color: red;
+			font-weight: unset;
+		}
+
+		.page-block,
+		.page-first {
+			width: 100%;
+			height: auto;
+		}
+
+		.page-block .table-ctrl {
+			width: 100%;
+			overflow-x: overlay;
+			overflow-y: hidden;
+			/* scroll-behavior: smooth; */
+		}
+
+		.page-block .table-ctrl .min-width-1000 {
+			min-width: 1000px;
+		}
+
+		.page-block table {
+			border-collapse: collapse;
+			font-size: 0.8rem;
+			line-height: 1.5;
+		}
+
+		.page-block table td,
+		.page-block table th {
+			padding: 6px 13px;
+			border: 2px solid #ddd;
+			text-align: left;
+		}
+
+		.page-block ol {
+			width: 100%;
+			line-height: 1.5;
+		}
+
+		.page-block ol>li {
+			padding: 0.25rem 0;
+		}
+
+		.page-foot {
+			width: 100%;
+			min-height: calc(100 * var(--vh));
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			background-color: rgba(0, 0, 0, 0);
+			color: white;
+			padding: 1rem 0px !important;
+		}
+
+		.page-foot__content {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+			font-size: 1em;
+			top: calc(85 * var(--vh));
+			position: sticky;
+			background-color: rgba(0, 0, 0, 0.7);
+			max-width: unset !important;
+		}
+
+		.page-foot__content__logo {
+			width: 6em;
+			height: 7em;
+		}
+
+		.page-foot__content__contact {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.page-foot__content__contact__item {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			align-items: center;
+			width: max-content;
+			height: auto;
+			padding: 0.5em 0;
+			margin: 0 1rem;
+			font-size: 1em;
+			color: white;
+			text-decoration: none;
+		}
+
+		.page-foot__contact__logo {
+			display: inline-block;
+			width: 1.25em;
+			height: 1.25em;
+			margin: 0 0.5rem;
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+		}
+
+		.page-block:nth-child(even),
+		.page-first,
+		.menu {
+			background-color: black;
+			color: white;
+		}
+
+		.page-block:nth-child(even) table {
+			border-color: white !important;
+			background-color: black;
+			color: white;
+		}
+
+		.page-block:nth-child(even) table td,
+		.page-block:nth-child(even) table th {
+			border-width: 1px;
+		}
+
+		.page-block:nth-child(even)>p strong {
+			color: #f8c345 !important;
+		}
+
+		.aegis-1 {
+			width: 167px;
+			height: 392px;
+			transform: translate(0px);
+			/*animation: aegis-slice-1 .5s 6s forwards ease-out;*/
+		}
+
+		@keyframes aegis-slice-1 {
+			100% {
+				transform: translate(0);
+			}
+		}
+
+		.aegis-2 {
+			width: 167px;
+			height: 392px;
+			transform: translate(-0px) scale(-1, 1);
+			/*animation: aegis-slice-2 .5s 6s forwards ease-out;*/
+		}
+
+		@keyframes aegis-slice-2 {
+
+			100% {
+				transform: translate(0) scale(-1, 1);
+			}
+		}
+
+		.aegis-title {
+			animation: aegis-title-ani 2s 10s forwards ease-out;
+			opacity: 0;
+		}
+
+		@keyframes aegis-title-ani {
+			0% {
+				transform: translate(25px, 2px);
+				opacity: 0;
+			}
+
+			100% {
+				transform: translate(0);
+				opacity: 1;
+			}
+		}
+
+		.aegis-sub-title {
+			animation: aegis-sub-ani 2s 10s forwards ease-out;
+			opacity: 0;
+		}
+
+		@keyframes aegis-sub-ani {
+			0% {
+				transform: translate(-25px, -3px);
+				opacity: 0;
+			}
+
+			100% {
+				transform: translate(0);
+				opacity: 1;
+			}
+		}
+
+		@media screen and (max-width: 768px) {
+			html {
+				font-size: 16px;
+			}
+
+			.page-first>div:nth-child(1)>svg:nth-child(1) {
+				width: 225px;
+				height: 261px;
+			}
+
+			.menu {
+				top: 0px;
+				height: 80px;
+			}
+
+			.menu>div {
+				flex-direction: column !important;
+			}
+
+			.menu>div>div {
+				justify-content: center !important;
+				flex-grow: 0 !important;
+				padding: 0 !important;
+			}
+			.menu>div>a{
+				display: none !important;
+			}
+
+			.page-foot__content {
+				top: calc(80 * var(--vh));
+			}
+
+			.page-foot__content__contact {
+				flex-direction: column;
+			}
+
+			.page-foot__content__contact__item{
+				min-width: 16em;
+			}
+
+			.aegis-1,
+			.aegis-2 {
+				width: 111px;
+				height: 261px;
+			}
+
+			.page-block:nth-child(3) {
+				margin-top: calc(100 * var(--vh) - 80px);
+			}
+		}
+
+		@media print {
+			@page {
+				size: A4 portrait;
+				/* margin: 4mm; */
+			}
+
+			html {
+				font-size: 24px !important;
+			}
+
+			.menu {
+				display: none !important;
+			}
+
+			.path-ani-1,
+			.path-ani-2 {
+				animation: unset !important;
+				stroke-dashoffset: 0 !important;
+			}
+
+			.path-ani-1 {
+				stroke: url(#g1-print) !important;
+			}
+
+			.path-ani-2 {
+				stroke: url(#g2-print) !important;
+			}
+
+			.aegis-title,
+			.aegis-sub-title {
+				animation: unset !important;
+				background: unset !important;
+				-webkit-background-clip: border-box !important;
+				-webkit-text-fill-color: unset !important;
+				opacity: 1 !important;
+			}
+
+			.aegis-title {
+				color: #d18305 !important;
+				font-size: 5em !important;
+			}
+
+			.aegis-sub-title {
+				color: #a5a4a0 !important;
+				font-size: 2em !important;
+			}
+
+			.small {
+				animation: unset !important;
+				opacity: 1 !important;
+			}
+
+			.hr {
+				display: none !important;
+			}
+
+			.container {
+				background-color: white !important;
+				display: block !important;
+			}
+
+			.container>div {
+				padding: 28px 14px !important;
+				background-color: white !important;
+				color: black !important;
+			}
+
+			.container>div>* {
+				opacity: 1 !important;
+			}
+
+			.page-block {
+				display: block !important;
+			}
+
+			.page-block>h2 {
+				text-align: center !important;
+			}
+
+			.page-block table {
+				color: black !important;
+			}
+
+			.page-block table td,
+			.page-block table th {
+				border: 1px solid #000 !important;
+			}
+
+			.page-block .table-ctrl>* {
+				min-width: unset !important;
+			}
+
+			.page-block:nth-child(3) {
+				margin-top: 0 !important;
+			}
+
+			.page-first {
+				position: relative !important;
+				height: 100% !important;
+				margin: 0 !important;
+				padding: 0 !important;
+			}
+
+			.page-block:nth-child(even)>p strong {
+				color: red !important;
+			}
+
+			.page-foot {
+				display: none !important;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class='container'>
+		<div class='menu menu-animation' id="menu">
+			<div>
+				<a href="#home">AEGIS</a>
+				<div>
+					<a href="#page-about">ABOUT</a>
+					<a id="print-page">WHITE</a>
+					<a href="#page-community">COMMUNITY</a>
+				</div>
+			</div>
+		</div>
+		<div class='page-first' id='home'>
+			<div>
+				<svg style='position: absolute' viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+					<style>
+						.small {
+							font-size: 156px;
+							font-weight: 700;
+							font-family: Montserrat;
+							animation: ani-A 3s 7s forwards ease-in-out;
+							opacity: 0;
+						}
+					</style>
+
+					<text dominant-baseline="middle" text-anchor="middle" x="50%" y="50%" class="small"
+						fill="url(#g3)">A</text>
+					<linearGradient id="g3" x1="1" x2="0" y1="0" y2="0">
+						<stop offset="25%" stop-color="#d18305"></stop>
+						<stop offset="75%" stop-color="#fcca4c"></stop>
+					</linearGradient>
+				</svg>
+				<svg class='aegis-1' style="margin: 0 5px;" xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" preserveAspectRatio="xMidYMid meet"
+					viewBox="0 0 167 392">
+					<style>
+						.path-ani-1 {
+							stroke-dasharray: 200%;
+							stroke-dashoffset: -200%;
+							animation: dash-1 8s forwards linear;
+							stroke: white;
+						}
+
+						.path-ani-2 {
+							stroke-dasharray: 200%;
+							stroke-dashoffset: 200%;
+							animation: dash-2 8s forwards linear;
+							stroke: white;
+						}
+
+						@keyframes dash-1 {
+							70% {
+								stroke-dashoffset: 0;
+							}
+
+							100% {
+								stroke-dashoffset: 0;
+								stroke: url(#g1);
+							}
+						}
+
+						@keyframes dash-2 {
+							70% {
+								stroke-dashoffset: 0;
+							}
+
+							100% {
+								stroke-dashoffset: 0;
+								stroke: url(#g2);
+							}
+						}
+					</style>
+					<defs>
+						<path
+							d="M167.38 392.2C156.75 387.34 150.11 384.3 147.45 383.09C61.47 343.79 5.16 259.18 2.11 164.69C1.83 155.97 1.13 134.17 0 99.29C10.69 97.45 17.37 96.3 20.05 95.84C37.9 92.77 52.08 79.13 55.84 61.41C56.33 59.08 57.57 53.27 59.54 43.97L167.38 0"
+							id="a5Lr6E5uR5" />
+						<clipPath id="cliph9UV8cFrCJ">
+							<use xlink:href="#a5Lr6E5uR5" opacity="1" />
+						</clipPath>
+					</defs>
+					<g>
+						<g>
+							<g class='path-ani-1' clip-path="url(#cliph9UV8cFrCJ)">
+								<use xlink:href="#a5Lr6E5uR5" opacity="1" fill-opacity="0" stroke-width="72"
+									stroke-opacity="1" />
+							</g>
+						</g>
+					</g>
+
+					<linearGradient id="g1" x1="1" x2="0" y1="0.3" y2="0">
+						<stop offset="0%" stop-color="white">
+							<animate attributeName="stop-color" values="white; #d18305" dur="4s" begin="6s"
+								repeatCount="1" fill="freeze"></animate>
+						</stop>
+						<stop offset="100%" stop-color="white">
+							<animate attributeName="stop-color" values="white; #fcca4c" dur="4s" begin="6s"
+								repeatCount="1" fill="freeze"></animate>
+						</stop>
+					</linearGradient>
+					<linearGradient id="g1-print" x1="1" x2="0" y1="0.3" y2="0">
+						<stop offset="0%" stop-color="#d18305" stop-opacity="1"></stop>
+						<stop offset="100%" stop-color="#fcca4c" stop-opacity="1"></stop>
+					</linearGradient>
+				</svg>
+				<svg class='aegis-2' style="margin: 0 5px;" xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" preserveAspectRatio="xMidYMid meet"
+					viewBox="0 0 167 392">
+					<defs>
+						<path
+							d="M167.38 392.2C156.75 387.34 150.11 384.3 147.45 383.09C61.47 343.79 5.16 259.18 2.11 164.69C1.83 155.97 1.13 134.17 0 99.29C10.69 97.45 17.37 96.3 20.05 95.84C37.9 92.77 52.08 79.13 55.84 61.41C56.33 59.08 57.57 53.27 59.54 43.97L167.38 0"
+							id="a5Lr6E5uR5" />
+						<clipPath id="cliph9UV8cFrCJ">
+							<use xlink:href="#a5Lr6E5uR5" opacity="1" />
+						</clipPath>
+					</defs>
+					<g>
+						<g>
+							<g class='path-ani-2' clip-path="url(#cliph9UV8cFrCJ)">
+								<use xlink:href="#a5Lr6E5uR5" opacity="1" fill-opacity="0" stroke-width="72"
+									stroke-opacity="1" />
+							</g>
+						</g>
+					</g>
+					<linearGradient id="g2" x1="1" x2="0" y1="0.3" y2="0">
+						<stop offset="0%" stop-color="white">
+							<animate attributeName="stop-color" values="white; #ececec" dur="4s" begin="6s"
+								repeatCount="1" fill="freeze"></animate>
+						</stop>
+						<stop offset="100%" stop-color="white">
+							<animate attributeName="stop-color" values="white; #959490" dur="4s" begin="6s"
+								repeatCount="1" fill="freeze"></animate>
+						</stop>
+					</linearGradient>
+					<linearGradient id="g2-print" x1="1" x2="0" y1="0.3" y2="0">
+						<stop offset="0%" stop-color="#ececec" stop-opacity="1"></stop>
+						<stop offset="100%" stop-color="#959490" stop-opacity="1"></stop>
+					</linearGradient>
+				</svg>
+			</div>
+			<h1 class='aegis-title'>AEGIS</h1>
+			<h2 class='aegis-sub-title'>Post Quantum Coin</h2>
+			<a class='scroll-prompt scroll-prompt-animation' href="#page-about" id="scroll-prompt">
+				<div></div>
+				<div></div>
+			</a>
+		</div>
+		<div class='page-block'>
+			<div class="href-anchor" id='page-about'></div>
+			<h2>ABOUT AEGIS</h2>
+			<p>
+				Bitcoin has evolved and the technology of digital currencies has swept the financial landscape. It is
+				now difficult to ignore the existence of these technologies and the potential disruption they could
+				still bring to the world. Bitcoin, along with most blockchain projects, uses the core security algorithm
+				Elliptic Curve Signature (ECDSA) and its derivatives. The Elliptic Curve Signature will soon face a
+				significant threat from universal quantum computers, and long-term holdings of these currencies will be
+				extremely risky.
+			</p>
+			<p>
+				Universal quantum computers can use a special quantum algorithm invented by Peter Williston Shor, which
+				is capable of outperforming the cracking speed of traditional supercomputers by an exponential multiple
+				for all cryptographic systems based on discrete logarithm or large prime decomposition problems,
+				including RSA and ECDSA.
+			</p>
+			<p>
+				Based on this quantum algorithm, a quantum computer can reverse-compute (crack) a wallet's private key
+				in a short time when the wallet's public key is exposed on the blockchain (e.g., when the public key is
+				publicly presented during a Bitcoin P2PKH transaction, or when the public key is exposed during a P2PK
+				transaction in early Bitcoin), making the wallet no longer secure.
+			</p>
+		</div>
+		<div class='page-block' id='page-introduction'>
+			<h2>I. Introduction</h2>
+			<p>
+				In this paper, we propose a multiple post-quantum cryptographic e-cash system with multiple post-quantum
+				cryptography as the core security foundation to leapfrog the huge threat posed by quantum computers to
+				blockchains. It is defined as a decentralized system with a balance of ease of use and post-quantum
+				security, which is protected by multiple post-quantum ciphers to maintain a high level of security even
+				if a single cryptosystem is breached, making it the best choice for long-term savings assets in the
+				post-quantum era.
+			</p>
+			<p>
+				This paper also proposes a new consensus algorithm based on post-quantum cryptography, which is easier
+				to mine on general-purpose CPUs and GPUs, and effectively reduces the advantage of dedicated mining
+				machines (ASICs), thus preventing excessive concentration of computing power on dedicated mining
+				machines.
+			</p>
+		</div>
+		<div class='page-block page-print-break' id='page-article-1'>
+			<h2>II. The Threat of Quantum Computers</h2>
+			<p>
+				In 1994, an American mathematician, Peter Williston Shor, invented a quantum prime factorization
+				algorithm, Shor's algorithm, at Bell Labs, which is much more efficient than traditional computers for
+				prime factorization and discrete logarithm problems. However, at that time, general-purpose quantum
+				computers were not yet mature enough to make effective use of Shor's algorithm.
+			</p>
+			<p>
+				The development of general-purpose quantum computers has far exceeded the expectations of
+				experts, and in the near future, these cryptosystems based on prime factorization and discrete
+				logarithm problems will no longer be secure.
+			</p>
+			<div class='table-ctrl'>
+				<table class="min-width-1000">
+					<thead>
+						<tr>
+							<th>System name</th>
+							<th>Based on problem</th>
+							<th>Remarks</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>RSA</td>
+							<td>Prime factorization</td>
+							<td>Most commonly used public key cryptosystem today (public key encryption and digital
+								signatures)</td>
+						</tr>
+						<tr>
+							<td>ECC</td>
+							<td>Discrete logarithm</td>
+							<td>NIST originally decided to be the next generation of public key cryptosystem standard
+								after
+								RSA</td>
+						</tr>
+						<tr>
+							<td>D-H</td>
+							<td>Discrete logarithm</td>
+							<td>Key Exchange</td>
+						</tr>
+						<tr>
+							<td>ECDH</td>
+							<td>Discrete logarithm</td>
+							<td>A variant of D-H</td>
+						</tr>
+						<tr>
+							<td>ECDSA</td>
+							<td>Discrete logarithm</td>
+							<td>Digital signature, the security foundation for Bitcoin and most other word currencies
+							</td>
+						</tr>
+						<tr>
+							<td>Schnorr</td>
+							<td>Discrete logarithm</td>
+							<td>Digital signature, supports multiple signatures, used by a few digital currencies,
+								algorithm
+								added by Bitcoin in 2021</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p>
+				Note: All ECC-like or ECDSA-like curve signatures or encryptions are mostly based on the
+				discrete logarithm problem, so they are also threatened by quantum computers.
+			</p>
+		</div>
+		<div class='page-block' id='page-article-2'>
+			<h2>III. The Potential Crisis For Bitcoin</h2>
+			<p>
+				As described in Section II, the elliptic curve signature (ECDSA) used by Bitcoin is one of the targets
+				of quantum computer threats. The cracking of elliptic curve signature mainly refers to the calculation
+				of the correct private key in a short period of time when the owner's public key is known (which cannot
+				be achieved by traditional computer algorithms), in order to undermine the security of the cryptosystem.
+			</p>
+			<p>
+				For a system like Bitcoin, which is based on elliptic curve signature security, the private key is
+				really the wallet, and having the private key allows you to use the money in the corresponding wallet.
+			</p>
+			<p>
+				Here are some basic bitcoin security flaws, using a recent P2PKH (Pay To Pubkey Hash) transaction as an
+				example. There are three main parts to what a user broadcasts during a transaction:
+			</p>
+			<ol>
+				<li>Transaction content (VIN VOUT and quantity of UTXO)</li>
+				<li>Transaction signature (digital signature of the transaction content, which proves the legitimacy of
+					the owner)</li>
+				<li>The public key of the owner of the coin (used to verify the legitimacy of the transaction signature)
+				</li>
+			</ol>
+			<p>below:</p>
+			<img src='./img/btc_tx_01.png'>
+			<p>
+				P2PKH transactions expose the user's public key at the first transaction, and this public key is
+				permanently recorded on the Bitcoin chain, making its corresponding private key no longer secure.
+			</p>
+			<p>
+				Note: All digital signature systems, including P2PKH, must use the public key to verify the
+				legitimacy of the signature.
+			</p>
+			<p>
+				Because of the ease of access to Bitcoin's blockchain data, the public key of a transaction's wallet
+				will be invisible and will eventually become the primary target of quantum computers, putting today's
+				Bitcoin system, which has a total market value of about $1 trillion, under serious threat. The following
+				figure shows the P2PKH transaction input (public key in yellow) as randomly queried by the
+				<a href='https://www.blockchain.com'>www.blockchain.com</a> block browser:
+			</p>
+			<img src='./img/btc_tx_02.png'>
+			<p>
+				If the sender still has a balance in their wallet, they will be one of the targets of the
+				quantum computer threat, and if they have 100 BTC in their wallet they will lose about $5 million.
+			</p>
+			<p>
+				The P2PK (Pay To Pubkey) transactions used by early Bitcoin are even more vulnerable. The difference
+				between P2PK and P2PKH is that the address of the P2PK when receiving Bitcoins is itself the public key,
+				not a public key hash like P2PKH, which will expose the public key itself earlier, resulting in a
+				quantum computer threat even if the wallet has never transferred coins. The following figure shows the
+				output of an early P2PK transaction randomly queried by the www.blockchain.com block browser, with the
+				public key in yellow:
+			</p>
+			<img src='./img/btc_tx_03.png'>
+			<p>
+				If this recipient has 200 BTC in their wallet that has not yet been spent or has a larger balance,
+				the owner of this wallet will lose this 200 BTC (approximately $10 million) or more under the threat
+				of a quantum computer.
+			</p>
+			<p>
+				With quantum computers, the Hewer algorithm, and the aforementioned transaction basis, Bitcoin faces two
+				major problems:
+			</p>
+			<p>
+				First, even if a P2PKH type wallet has been transferred out with an extremely secure private key (e.g.,
+				hard cold wallet, written on paper and sealed, etc.), the private key can still be stolen (decrypted)
+				and all the coins in the wallet lost.
+			</p>
+			<p>
+				Second, a large number of bitcoins were lost by early participants of bitcoin (lost wallet private key)
+				using P2PK because the public key has long been exposed and vulnerable to quantum computer decryption.
+				So far, it is estimated that about 4 million bitcoins (about 20% of the total, the current market value
+				of $200 billion) have been lost.
+			</p>
+		</div>
+		<div class='page-block' id='page-article-3'>
+			<h2>IV. Post-Quantum Cryptography</h2>
+			<p>
+				The focus of post-quantum cryptography is to ensure the security features of quantum computers even
+				after they become popular. These digital currencies will no longer be secure when a general-purpose
+				quantum calculator equipped with Hewer's algorithm becomes available in the near future. At the time of
+				writing, general-purpose quantum computers are still a long way from breaking this cryptography, but the
+				development of quantum computers has exceeded the expectations of experts and stakeholders in the field,
+				and most digital currencies, including Bitcoin, will be greatly impacted once quantum computers become
+				commnplace.
+			</p>
+			<p class="page-print-break">
+				On December 20, 2016, NIST submitted a request for nominations of public-key post-quantum cryptographic
+				algorithms, and after three rounds of selection, a conclusion was tentatively reached that there are
+				currently two main categories of relatively reliable post-quantum signature algorithms:
+			</p>
+			<ol>
+				<li>
+					Algorithms based on lattice theory, using the short integer solution problem (Short integer
+					solution problem), whose characteristics are moderate public and private key size, moderate
+					signature length, and relatively balanced algorithms in each parameter compared to other
+					post-quantum algorithms, whose representatives are CRYSTALS-DILITHIUM, FALCON, and NTRU.
+				</li>
+				<li>
+					Multivariate algorithms, based on Multivariate Quadratic polynomial (MQ) problem, have the
+					advantage of minimal signature size, but correspondingly larger public and private key sizes,
+					and are represented by GeMSS, LUOV, OUV, and Rainbow.
+				</li>
+			</ol>
+		</div>
+		<div class='page-block page-print-break' id='page-article-4'>
+			<h2>
+				V. Quantum Shield Technical Specification
+			</h2>
+			<table>
+				<tbody>
+					<tr>
+						<td>Name</td>
+						<td>AEGIS PQC</td>
+					</tr>
+					<tr>
+						<td>Code</td>
+						<td>aPQC</td>
+					</tr>
+					<tr>
+						<td>Mining algorithm</td>
+						<td>PQPoW (PoW)</td>
+					</tr>
+					<tr>
+						<td>Structure type</td>
+						<td>Public chain blockchain</td>
+					</tr>
+					<tr>
+						<td>Core security</td>
+						<td>Multiple post-quantum cryptography, which includes but is not limited to various
+							post-quantum digital signatures selected by NIST2020</td>
+					</tr>
+					<tr>
+						<td>Total number of issues</td>
+						<td>210,000,000</td>
+					</tr>
+					<tr>
+						<td>Release year</td>
+						<td>Approximately 77 years (to the end of the century)</td>
+					</tr>
+					<tr>
+						<td>Code base</td>
+						<td>100% customizable, unique and extensible, and all code and documentation is open-sourced
+							with the Genesis block</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class='page-block page-print-break' id='page-article-5'>
+			<h2>VI. Post-Quantum Secure Transactions</h2>
+			<p>
+				In this paper, we use the same UTXO structure as Bitcoin. During the transaction, the transferring party
+				must prove that it is the legitimate owner of UTXO through a digital signature, and set the output
+				script to restrict future users of this transaction. Quantum Shield Master has improved its core
+				algorithm of digital signatures to directly resist the threat of quantum algorithms.
+			</p>
+			<img src='./img/pq_tx_01.png'>
+			<img src='./img/pq_tx_02.png'>
+		</div>
+		<div class='page-block' id='page-article-6'>
+			<h2>VII. Proof of Workload and Timestamp Mechanism</h2>
+			<p>
+				Bitcoin's proof of workload came in 2012 when it was realized that mining efficiency could be improved
+				by designing specialized ASIC integrated circuits to perform hash calculations exclusively. It has been
+				shown that ASIC mining is hundreds of times faster than GPU or CPU mining with the same energy
+				consumption, and this has almost dismantled the original concept of one CPU, one vote, "majority"
+				decision expressed as the longest chain in Bitcoin.
+			</p>
+			<p>
+				In this paper, we propose a new mining algorithm that uses some post-quantum cryptography problems as
+				the basis for workload proofs. This approach can effectively suppress the ASIC advantage over
+				general-purpose CPUs and GPUs, and make its miners more widely diversified in terms of participants, as
+				in the case of ETH or early BTC. Although POW has been widely criticized in the past, it is still the
+				best choice in terms of security.
+			</p>
+		</div>
+		<div class='page-block' id='page-incentives'>
+			<h2>VIII. Incentives</h2>
+			<p>
+				As with Bitcoin, the first transaction of each block is specialized to produce a new minted coin (mining
+				reward) owned by the creator of the block. This increases the incentive for nodes to support the
+				network, and provides a way to distribute electronic money into circulation without a centralized
+				authority issuing the currency. This method of continuously adding a certain amount of new money to the
+				monetary system is very similar to expending resources to mine gold and inject it into circulation. At
+				this point, the time and power consumption of the CPU and GPU are the resources consumed.
+			</p>
+			<p>
+				Incentives:
+			</p>
+			<table>
+				<tbody>
+					<tr>
+						<td>Block time</td>
+						<td>approx. 10 minutes</td>
+					</tr>
+					<tr>
+						<td>Coin life</td>
+						<td>approx. 77 years (until the end of the century)</td>
+					</tr>
+					<tr>
+						<td>Initial reward</td>
+						<td>240</td>
+					</tr>
+					<tr>
+						<td>Yield per reduction</td>
+						<td>Each reduction is approximately of the previous one
+							$$\frac{1}{\sqrt[8]{2}} \approx 91.7\%$$</td>
+					</tr>
+					<tr>
+						<td>Duration of yield reduction</td>
+						<td>It takes 3.3% longer time to produce a subsequent unit than the previous year. For example,
+							if it takes one year to produce the first unit, it take 1.03 years to produce the second
+							unit.
+							$$T_n = T_{n-1} \times 103.3\%$$</td>
+					</tr>
+					<tr>
+						<td>Total</td>
+						<td>210,000,000</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Projected block reward reduction graph (according to different reward intervals):</p>
+			<canvas id="reduction_graph_01" class="page-print-break"></canvas><br><br>
+			<p>Projected block reward reduction graph (by yearly interval):</p>
+			<canvas id="reduction_graph_02"></canvas><br><br>
+			<p>Projected Coin Out Accumulation Chart (by Bonus Interval):</p>
+			<canvas id="reduction_graph_03"></canvas><br><br>
+			<p>Projected Coin Out Accumulation Chart (by yearly interval):</p>
+			<canvas id="reduction_graph_04"></canvas><br>
+		</div>
+		<div class='page-block' id='page-conclusion'>
+			<h2>IX. Conclusion</h2>
+			<p>
+				Although NIST has selected a variety of post-quantum algorithms for the world, this is just the
+				beginning, and there is no guarantee that the algorithms eventually approved by NIST will be secure,
+				just as NIST once claimed that ECC could replace RSA.
+			</p>
+			<p>
+				The ultimate goal of this paper is to propose a decentralized digital currency with multiple quantum
+				resistances that can operate safely without immediate forking even if one of the post-quantum algorithms
+				is cracked, and to buy buffer time for system upgrades, making it the most secure long-term property
+				protection solution even after universal quantum computers become popular.
+			</p>
+		</div>
+		<hr class="white">
+		<div class='page-foot' id='page-community'>
+			<div class='page-foot__content'>
+				<div class='page-foot__content__contact'>
+					<a href="mailto:aegispqc@protonmail.com" class='page-foot__content__contact__item'>
+						<div class="page-foot__contact__logo email-logo"></div><span>aegispqc@protonmail.com</span>
+					</a>
+					<a href="https://github.com/aegispqc" class='page-foot__content__contact__item'>
+						<div class="page-foot__contact__logo github-logo"></div><span>aegispqc@github.com</span>
+					</a>
+					<a href="https://twitter.com/aegisqpc" class='page-foot__content__contact__item'>
+						<div class="page-foot__contact__logo twitter-logo"></div><span>@aegisqpc</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		location.hash = "";
+		if (window.history) {
+			window.history.scrollRestoration = "manual";
+		}
+		var screenRate = 1;
+		var targetHeight = 0;
+		var pageBlockTop = [];
+		var activeQueue = [];
+		var queueInterval = undefined;
+		var queueIntervalTime = 200;
+		var container = document.getElementsByClassName("container")[0];
+		var pageBlockDom = document.getElementsByClassName("page-block");
+		var footDom = document.getElementById("page-community");
+		var menuDom = document.getElementById("menu");
+		var scrollPrompt = document.getElementById("scroll-prompt");
+		var windowHeight = window.innerHeight;
+		function setVH() {
+
+			windowHeight = window.innerHeight;
+			document.documentElement.style.setProperty(
+				'--vh',
+				window.innerHeight * 0.01 / screenRate + 'px'
+			);
+		}
+		function checkDpi() {
+
+			var width = window.innerWidth;
+			if (width >= screen.availWidth) {
+				screenRate = width / screen.availWidth;
+				document.body.style.zoom = screenRate;
+			}
+			else {
+				screenRate = 1;
+			}
+		}
+		function getPageScrollTop() {
+
+			pageBlockTop = [];
+			for (var i = 0; i < pageBlockDom.length; i++) {
+
+				if (!pageBlockDom[i]) continue;
+				var blockTop = pageBlockDom[i].offsetTop + targetHeight;
+				for (var j = 0; j < pageBlockDom[i].children.length; j++) {
+					var blockChild = pageBlockDom[i].children[j];
+					if (!blockChild ||
+						blockChild.classList.contains("href-anchor") ||
+						blockChild.classList.contains("chartjs-size-monitor") ||
+						blockChild.tagName === "BR" ||
+						blockChild.offsetTop < 0) continue;
+
+					pageBlockTop[pageBlockTop.length] = {
+						elem: blockChild,
+						top: blockTop + blockChild.offsetTop
+					}
+				}
+			}
+			pageBlockTop[pageBlockTop.length] = {
+				elem: footDom,
+				top: footDom.offsetTop + targetHeight
+			}
+
+			pageBlockTop.sort(function (a, b) {
+				return a.top - b.top;
+			});
+		}
+		function execAnimationQueue(scrollTop) {
+
+			if (typeof scrollTop === "number" && activeQueue.length > 0) {
+				for (var i = 0; i < activeQueue.length; i++) {
+					var item = activeQueue[i];
+					if (typeof item === "object" && item.top < scrollTop) {
+						var activeElem = activeQueue.shift();
+						if (typeof activeElem === "object") {
+							activeElem.elem.classList.add("visible");
+						}
+					}
+					else break;
+				}
+			}
+
+			if (!queueInterval) {
+				queueInterval = setInterval(function () {
+					var activeElem = activeQueue.shift();
+					if (typeof activeElem === "object") {
+						activeElem.elem.classList.add("active");
+					}
+				}, queueIntervalTime)
+			}
+		}
+		function scrollHandler(e) {
+
+			window.onscroll = undefined;
+			var scrollTop = document.body.scrollTop / screenRate;
+			var screenHeight = windowHeight / screenRate;
+			while (typeof pageBlockTop[0] === "object" &&
+				(screenHeight + scrollTop + 106 > pageBlockTop[0].top)) {
+
+				activeQueue[activeQueue.length] = pageBlockTop.shift();
+			}
+
+			execAnimationQueue(scrollTop);
+			if (pageBlockTop.length > 0 ||
+				activeQueue.length > 0) {
+
+				setTimeout(() => {
+					window.onscroll = scrollHandler;
+				}, 30);
+			}
+		}
+		function addScrollSmooth(e) {
+			document.removeEventListener("mousedown", addScrollSmooth);
+			document.removeEventListener("touchstart", addScrollSmooth);
+			document.documentElement.classList.add("scroll-smooth");
+		}
+		function initPage() {
+
+			checkDpi();
+			setVH();
+			getPageScrollTop();
+		}
+		window.onbeforeunload = function () {
+
+			window.scrollTo(0, 0);
+		}
+		window.onload = function () {
+
+			window.scrollTo(0, 0);
+			initPage();
+			window.onscroll = scrollHandler;
+			window.addEventListener("scroll", function () {
+				var scrollTop = document.body.scrollTop / screenRate;
+				if (scrollTop > 106) {
+					scrollPrompt.classList.add("none");
+					menuDom.classList.remove("menu-animation");
+					scrollPrompt.classList.remove("scroll-prompt-animation");
+				}
+				else {
+					scrollPrompt.classList.remove("none");
+				}
+			});
+
+			document.addEventListener("mousedown", addScrollSmooth);
+			document.addEventListener("touchstart", addScrollSmooth);
+		}
+
+
+		window.addEventListener('resize', initPage);
+		document.getElementById("print-page").onclick = function () {
+
+			window.print();
+		}
+		scrollPrompt.onanimationend = function (e) {
+
+			if (e.animationName === "ani-A") {
+				scrollPrompt.onanimationend = undefined;
+				scrollPrompt.classList.remove("scroll-prompt-animation");
+			}
+		}
+
+		const chartLebel = [1, 2.03, 3.1, 4.2, 5.34, 6.52, 7.73, 8.99, 10.28, 11.62, 13.01, 14.44, 15.91, 17.44, 19.01, 20.64, 22.32, 24.06, 25.85, 27.71, 29.62, 31.6, 33.64, 35.75, 37.93, 40.18, 42.51, 44.91, 47.39, 49.96, 52.6, 55.34, 58.17, 61.09, 64.1, 67.22, 70.44, 73.76, 77.19];
+		const reward = [{ x: 1, y: 240 }, { x: 2.03, y: 220 }, { x: 3.1, y: 201.8 }, { x: 4.2, y: 185 }, { x: 5.34, y: 169.7 }, { x: 6.52, y: 155.6 }, { x: 7.73, y: 142.7 }, { x: 8.99, y: 130.8 }, { x: 10.28, y: 119.9 }, { x: 11.62, y: 110 }, { x: 13.01, y: 100.9 }, { x: 14.44, y: 92.5 }, { x: 15.91, y: 84.8 }, { x: 17.44, y: 77.8 }, { x: 19.01, y: 71.3 }, { x: 20.64, y: 65.4 }, { x: 22.32, y: 59.9 }, { x: 24.06, y: 55 }, { x: 25.85, y: 50.4 }, { x: 27.71, y: 46.2 }, { x: 29.62, y: 42.4 }, { x: 31.6, y: 38.9 }, { x: 33.64, y: 35.6 }, { x: 35.75, y: 32.7 }, { x: 37.93, y: 29.9 }, { x: 40.18, y: 27.5 }, { x: 42.51, y: 25.2 }, { x: 44.91, y: 23.1 }, { x: 47.39, y: 21.2 }, { x: 49.96, y: 19.4 }, { x: 52.6, y: 17.8 }, { x: 55.34, y: 16.3 }, { x: 58.17, y: 14.9 }, { x: 61.09, y: 13.7 }, { x: 64.1, y: 12.6 }, { x: 67.22, y: 11.5 }, { x: 70.44, y: 10.6 }, { x: 73.76, y: 9.7 }, { x: 77.19, y: 8.9 }];
+		const accumulation = [{x:1,y:12623040},{x:2.03,y:24575860},{x:3.1,y:35901683.2},{x:4.2,y:46627243.2},{x:5.34,y:56790406.5},{x:6.52,y:66416756.1},{x:7.73,y:75536285},{x:8.99,y:84171177.8},{x:10.28,y:92347758.3},{x:11.62,y:100096708.3},{x:13.01,y:107439201.3},{x:14.44,y:114392611.3},{x:15.91,y:120977500.9},{x:17.44,y:127218227.9},{x:19.01,y:133126288.5},{x:20.64,y:138724266.9},{x:22.32,y:144020684.8},{x:24.06,y:149044329.8},{x:25.85,y:153799721},{x:27.71,y:158302696.4},{x:29.62,y:162571655.6},{x:31.6,y:166617489},{x:33.64,y:170442281.8},{x:35.75,y:174071425.9},{x:37.93,y:177499341.3},{x:40.18,y:180756138.8},{x:42.51,y:183839031.2},{x:44.91,y:186758293.7},{x:47.39,y:189525847.7},{x:49.96,y:192141995.9},{x:52.6,y:194621589.3},{x:55.34,y:196967159.3},{x:58.17,y:199182029.4},{x:61.09,y:201285719.2},{x:64.1,y:203284356.4},{x:67.22,y:205168700.4},{x:70.44,y:206962888.2},{x:73.76,y:208658923.5},{x:77.19,y:210000000}];
+		const rewardY = [240, 220, 201.8, 185, 169.7, 155.6, 142.7, 130.8, 119.9, 110, 100.9, 92.5, 84.8, 77.8, 71.3, 65.4, 59.9, 55, 50.4, 46.2, 42.4, 38.9, 35.6, 32.7, 29.9, 27.5, 25.2, 23.1, 21.2, 19.4, 17.8, 16.3, 14.9, 13.7, 12.6, 11.5, 10.6, 9.7, 8.9];
+		const accumulationY = [12623040,24575860,35901683.2,46627243.2,56790406.5,66416756.1,75536285,84171177.8,92347758.3,100096708.3,107439201.3,114392611.3,120977500.9,127218227.9,133126288.5,138724266.9,144020684.8,149044329.8,153799721,158302696.4,162571655.6,166617489,170442281.8,174071425.9,177499341.3,180756138.8,183839031.2,186758293.7,189525847.7,192141995.9,194621589.3,196967159.3,199182029.4,201285719.2,203284356.4,205168700.4,206962888.2,208658923.5,210000000];
+
+		const ctx01 = document.getElementById('reduction_graph_01').getContext('2d');
+		const ctx02 = document.getElementById('reduction_graph_02').getContext('2d');
+		const ctx03 = document.getElementById('reduction_graph_03').getContext('2d');
+		const ctx04 = document.getElementById('reduction_graph_04').getContext('2d');
+
+		const reductionGraph01 = new Chart(ctx01, {
+
+			type: 'line',
+			data: {
+
+				labels: [0, ...chartLebel],
+				datasets: [
+					{
+						showLine: true,
+						label: 'Reward reduction',
+						yAxisID: 'A',
+						backgroundColor: 'rgba(255, 99, 132, .0)',
+						borderColor: 'rgb(255, 99, 132)',
+						data: [null, ...rewardY]
+					},
+				],
+
+			},
+			options:
+			{
+				responsive: true,
+				scales: {
+
+					xAxes: [
+						{
+							scaleLabel: {
+
+								display: true,
+								labelString: 'Years'
+							}
+						},
+					],
+					yAxes: [
+					{
+						id: 'A',
+						type: 'linear',
+						position: 'right',
+						scaleLabel: {
+
+							display: true,
+							labelString: 'Coin'
+						}
+					}]
+				}
+			}
+		});
+
+		const reductionGraph02 = new Chart(ctx02, {
+
+			type: 'scatter',
+			data: {
+
+				datasets: [
+					{
+						showLine: true,
+						label: 'Reward reduction',
+						yAxisID: 'A',
+						backgroundColor: 'rgba(255, 99, 132, .0)',
+						borderColor: 'rgb(255, 99, 132)',
+						data: [null, ...reward]
+					},
+				],
+			},
+			options: {
+
+				responsive: true,
+				scales: {
+
+					xAxes: [
+						{
+							scaleLabel: {
+
+								display: true,
+								labelString: 'Years'
+							}
+						},
+					],
+					yAxes: [
+						{
+							id: 'A',
+							type: 'linear',
+							position: 'right',
+							scaleLabel: {
+
+								display: true,
+								labelString: 'Coin'
+							}
+						}
+					]
+				}
+			}
+		});
+
+		const reductionGraph03 = new Chart(ctx03, {
+
+			type: 'line',
+			data: {
+
+				labels: [0, ...chartLebel],
+				datasets: [
+					{
+						showLine: true,
+						label: 'Coin Out Accumulation',
+						yAxisID: 'A',
+						backgroundColor: 'rgba(99, 255, 132, .0)',
+						borderColor: 'rgb(99, 255, 132)',
+						data: [null, ...accumulationY]
+					},
+				],
+
+			},
+			options: {
+
+				responsive: true,
+				scales: {
+
+					xAxes: [
+						{
+							scaleLabel: {
+
+								display: true,
+								labelString: 'Years'
+							}
+						},
+					],
+					yAxes: [
+						{
+							id: 'A',
+							type: 'linear',
+							position: 'right',
+							scaleLabel: {
+
+								display: true,
+								labelString: 'Coin'
+							}
+						}
+					]
+				}
+			}
+		});
+
+		const reductionGraph04 = new Chart(ctx04, {
+			type: 'scatter',
+			data: {
+				datasets: [
+					{
+						showLine: true,
+						label: 'Coin Out Accumulation',
+						yAxisID: 'A',
+						backgroundColor: 'rgba(99, 255, 132, .0)',
+						borderColor: 'rgb(99, 255, 132)',
+						data: [null, ...accumulation]
+					},
+				],
+
+			},
+			options: {
+
+				responsive: true,
+				scales: {
+
+					xAxes: [
+						{
+							scaleLabel: {
+
+								display: true,
+								labelString: 'Years'
+							}
+						},
+					],
+					yAxes: [
+						{
+							id: 'A',
+							type: 'linear',
+							position: 'right',
+							scaleLabel: {
+
+								display: true,
+								labelString: 'Coin'
+							}
+						},
+					]
+				}
+			}
+		});
+
+	</script>
+</body>
+
+</html>
